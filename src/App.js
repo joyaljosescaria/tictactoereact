@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import xo from './xo.png';
 import ox from './ox.png';
@@ -127,11 +127,11 @@ function App() {
   const checkNine = (winner) => {
     let cnt = 0
     for (let i = 0; i < 9; i++) {
-      if (xoxar[i].isHidden == false) {
+      if (xoxar[i].isHidden === false) {
         cnt = Number(cnt) + 1
       }
     }
-    if (cnt == 9) {
+    if (cnt === 9) {
       if (!winner) {
         return true
       }
@@ -144,7 +144,7 @@ function App() {
   const xoxoMove = () => {
     let temparr = []
     for (let i = 0; i < 9; i++) {
-      if (xoxar[i].isHidden == true) {
+      if (xoxar[i].isHidden === true) {
         temparr.push(i)
       }
     }
@@ -176,7 +176,7 @@ function App() {
 
     if (!chk && !winner) {
       xoxoMove()
-      var winner = checkWin()
+      winner = checkWin()
       const chk = checkNine(winner)
       if (chk) {
         winner = {
@@ -211,7 +211,7 @@ function App() {
         <h1>XOX</h1>
         <div className="box">
           {xoxar.map((xox, index) => (
-            <div className="grid-item"><button disabled={btnDis} onClick={() => handleClick(index)} className="btn" id={`btn${index}`}>{xox.isHidden === false ? (xox.value === "x" ? <img src={xo} /> : <img src={ox} />) : <img src="" />}</button></div>)
+            <div key={index} className="grid-item"><button disabled={btnDis} onClick={() => handleClick(index)} className="btn" id={`btn${index}`}>{xox.isHidden === false ? (xox.value === "x" ? <img src={xo} alt="x"/> : <img src={ox} alt="o" />) : <img src="" alt="" />}</button></div>)
           )}
         </div>
         <button className="btn1" onClick={() => window.location.reload(false)}>Restart Game!</button>
